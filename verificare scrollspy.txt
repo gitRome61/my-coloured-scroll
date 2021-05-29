@@ -1,0 +1,160 @@
+
+https://dev.to/nikhilroy2/how-to-create-javascript-scrollspy-vanilla-js-tutorial-35o9
+
+
+HTML SCSS JSResult Skip Results Iframe
+EDIT ON
+<menu>
+  <ul>
+    <li class="active"> <a href="#section1"> Section 1 </a> </li>
+    <li> <a href="#section2"> Section 2 </a> </li>
+    <li> <a href="#section3"> Section 3 </a> </li>
+    <li> <a href="#section4"> Section 4 </a> </li>
+    <li> <a href="#section5"> Section 5 </a> </li>
+    
+    </ul>
+  
+</menu>
+
+<main>
+  <section id="section1"> 
+  <h1> Section 1 </h1>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+  
+  </section>
+  
+  <section id="section2"> 
+  <h1> Section 2 </h1>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+  
+  </section>
+  
+  <section id="section3"> 
+  <h1> Section 3 </h1>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+  
+  </section>
+  
+  <section id="section4"> 
+  <h1> Section 4 </h1>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+  
+  </section>
+  
+  <section id="section5"> 
+  <h1> Section 5 </h1>
+    <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+  
+  </section>
+  
+  </main>
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^scss
+
+HTML SCSS JSResult Skip Results Iframe
+EDIT ON
+:root{
+  scroll-behavior: smooth;
+}
+body{
+  display: flex;
+  flex-wrap: wrap;
+  @mixin mp-0{
+    margin: 0;
+    padding: 0;
+  }
+  @include mp-0;
+  menu{
+    
+    $w: 200px;
+    display: block;
+    @include mp-0;
+    $h: 100vh;
+    width: $w;
+    ul{
+      @include mp-0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      position: fixed;
+      width: $w;
+      height: $h;
+      background: #ccc;
+      top: 0;
+      left: 0;
+      li{
+        transition: .3s;
+        padding: .5rem;
+       &.active{
+          background: deeppink;
+         a{
+           color: white;
+         }
+          
+        }
+        a{
+        color: #222;
+        text-decoration: none;
+         
+        }
+        
+      }
+    }
+  }
+  
+  main{
+    width: 100%;
+  @include mp-0;
+  margin-left: 200px;
+    padding: .5rem;
+    section{
+      padding:1rem;
+      background: #eee;
+      line-height: 28px;
+      box-shadow: 0 3px 7px #222;
+      margin-bottom: .5rem;
+      h1{
+      text-align: center;
+    }
+    }
+  
+  }
+  
+ 
+}
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^js
+
+
+
+
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+let menuSection = document.querySelectorAll('menu li');
+
+// for clickable event
+menuSection.forEach(v=> {
+  v.onclick = (()=> {
+   setTimeout(()=> {
+      menuSection.forEach(j=> j.classList.remove('active'))
+    v.classList.add('active')
+  },300)
+   })
+})
+
+// for window scrolldown event
+
+window.onscroll = (()=> {
+  let mainSection = document.querySelectorAll('main section');
+
+  mainSection.forEach((v,i)=> {
+    let rect = v.getBoundingClientRect().y
+    if(rect < window.innerHeight-200){
+      menuSection.forEach(v=> v.classList.remove('active'))
+      menuSection[i].classList.add('active')
+    }
+  })
+})
+
